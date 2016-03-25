@@ -3,7 +3,6 @@
 //Create a function called isTyler that accepts name as it's only parameter.
 //If the argument you passed in is equal to 'Tyler', return true. If it's not, return false.
 
-
 var name = 'Tyler';
 
 function isTyler(name) {
@@ -20,7 +19,7 @@ function isTyler(name) {
 //Create a function called getName that uses prompt() to prompt the user for their name, then returns the name.
 
 function getName() {
-  var name = prompt("Please enter your name");
+  var name = prompt('What is your name?');
   return name;
 }
 
@@ -29,13 +28,8 @@ function getName() {
 //Create a function called welcome that uses your getName function you created in the previous problem to get the users name,
 //then alerts "Welcome, " plus whatever the users name is.
 
-function getName() {
-    var name = prompt("Please enter your name");
-    return name;
-}
-
 function welcome() {
-    alert("Welcome, " + getName());
+    alert('Welcome, ' + getName());
 }
 
 //Next problem
@@ -57,13 +51,13 @@ function welcome() {
 //Create a function called myName that returns your name
 
 function myName() {
-  return "Andrew";
+  return 'Andrew';
 }
 
 //Now save the function definition of myName into a new variable called newMyName
 
-var newMyName = function myName() {
-  return "Andrew";
+var newMyName = function() {
+  return 'Andrew';
 };
 
 //Now alert the result of invoking newMyName

@@ -28,14 +28,15 @@ var callFriend = function(){
 //Above you're given a callFriend function that returns another function.
 //Do what you need to do in order to call your function and get 'Calling Jake at 435-215-9248' in your console.
 
-var callFriend = function(){
+var callFriend = function(number){
   var friend = 'Jake';
   function callF(number){
-    callF("435-215-9248");
     return 'Calling ' + friend + ' at ' + number;
   }
   return callF;
 };
+
+callFriend('435-215-9248');
 
 //Next Problem
 
@@ -43,12 +44,12 @@ var callFriend = function(){
   Write a function called makeCounter that makes the following code work properly.
 */
 
-var makeCounter = function() {
-    var counter = 0;
-    return function() {
-      return counter += 1;
-    };
-};
+function makeCounter() {
+  var counter = 0;
+  return function() {
+    return counter += 1;
+  };
+}
 
   var count = makeCounter();
   count(); // 1
@@ -58,22 +59,30 @@ var makeCounter = function() {
 
 //Next Problem
 
-/*
-  Write a function named codeLove that returns the string 'I love code'.
-  Write a second function named codeFriend that accepts the first function as it's first parameter.
-  The second function should return a new third function.
-  Store the third function in a variable, codeEcho which, when invoked, invokes the first, original
-  function that was passed in, but will only ever do so once (returns null after first invocation).
+/*  ORIGINAL WORDING:
+    Write a function named codeLove that returns the string 'I love code'.
+    Write a second function named codeFriend that accepts the first function as it's first parameter.
+    The second function should return a new third function.
+    Store the third function in a variable, codeEcho which, when invoked, invokes the first, original
+    function that was passed in, but will only ever do so once (returns null after first invocation).
 */
 
-var codeLove = function() {
-  return "I love code";
-};
+/*  MY WORDING:
+    Write a function named codeLove that returns the string 'I love code'.
+    Write a second function named codeFriend that accepts codeLove as it's parameter and returns a third (anonymous) function.
+    The third function will return the invocation of codeLove, but will only do so once. It will return null after the first invocation.
+    Invoke codeFriend with codeLove passed in as a parameter and assign the result to a new variable named codeEcho.
+*/
+
+function codeLove() {
+  return 'I love code';
+}
+
+var run = false;  /* set run to false here ?*/
 
 function codeFriend(func) {
-  var run = false;
-  return function(){
-    if (!run) {
+  return function() {     /* set run to false here ?*/
+    if (!run) {           /* set run to false here ?*/
       run = true;
       return func();
     }
@@ -83,7 +92,7 @@ function codeFriend(func) {
   };
 }
 
-codeEcho = codeFriend(codeLove);
+var codeEcho = codeFriend(codeLove);
 
 //Next Problem;
 
@@ -95,16 +104,16 @@ codeEcho = codeFriend(codeLove);
 */
 
 function fnCounter(func, N) {
-    var counter = N;
-    return function innerFunc() {
+  var counter = N;
+  return function(){
     if (counter > 0) {
       counter = counter - 1;
       return func();
-      }
-    if (counter === 0){
-        return "STOP";
-      }
-    };
+    }
+    else {
+      return 'STOP';
+    }
+  };
 }
 
 //Next Problem
@@ -130,19 +139,16 @@ function fnCounter(func, N) {
 
   // Fix the counter function so that it works the way you expect it to work. (logging 1 then 2 then 3, etc) (Note: No unit test for this one because of the timeout)
 
-var i = 1;
-
-function counter(){
-  setTimeout(function() {
-    console.log(i);
-    i++;
-    if (i <= 5) {
-      counter();
-    }
- }, 1000);
-}
-
-counter();
+  var i = 1;
+  function counter() {
+    setTimeout(function timer() {
+      console.log(i);
+      i++;
+      if (i <= 5) {
+        counter();
+      }
+    }, 1000);
+  }
 
 //Next Problem
 
@@ -159,19 +165,6 @@ counter();
   *Hint: Don't let this fool you. Break down what's really happening here.
 */
 
-// var num = 0;
-//
-// var funcArray = [function() {
-//     funcArray.push(function func() {
-//     return num;
-//   });
-//   num++;
-// }];
-
-//  var funcArray = [function() {return 0}, function() {return 1}, function() {return 2}, function() {return 3}, function() {return 4}, function() {return 5}];
-
-//Gunnar Gabrielson
-
 function createFuncArray(num){
     return function() {
     return num;
@@ -179,7 +172,6 @@ function createFuncArray(num){
 }
 
 var funcArray = [];
-
 for (var i = 0; i < 6; i++) {
     funcArray.push(createFuncArray(i));
 }
